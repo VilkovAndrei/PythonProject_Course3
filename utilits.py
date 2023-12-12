@@ -1,4 +1,5 @@
 import json
+from datetime import date
 
 
 def load_data_ops(file_name):
@@ -13,3 +14,58 @@ def load_data_ops(file_name):
     operations = [d for d in operations if d != {}]  # очистка от пустых словарей
 
     return operations
+
+
+def show_operation(operation_dict):
+    """
+    Вывод на экран информации по банковской операции
+    :param operation_dict:
+    :return:
+    """
+    operation_date = date.fromisoformat(operation_dict['date'][:10]).strftime("%d.%m.%Y")
+    operation_description = operation_dict["description"]
+    if "from" not in operation_dict.keys():
+        operation_from = ""
+    else:
+        if operation_dict["from"][:5] == "Счет ":
+            operation_from = "Счет " + hide_account_number(operation_dict["from"])
+        else:
+            operation_from = operation_dict["from"][:-16] + hide_card_number(operation_dict["from"])
+
+    if operation_dict["to"][:5] == "Счет ":
+        operation_to = "Счет " + hide_account_number(operation_dict["to"])
+    else:
+        operation_to = operation_dict["to"][:-16] + hide_card_number(operation_dict["to"])
+
+    operation_amount = operation_dict["operationAmount"]["amount"]
+    operation_currency = operation_dict["operationAmount"]["currency"]["name"]
+
+    print(f"{operation_date} {operation_description}")
+    print(f"{operation_from} -> {operation_to}")
+    print(f"{operation_amount} {operation_currency}\n")
+
+    return
+
+
+def hide_card_number(operation_card_number):
+    """
+    Скрывает часть номера карты
+    :param operation_card_number:
+    :return:
+    """
+    card_number = operation_card_number[-16:]
+    h_card_number = card_number[:4] + " " + card_number[4:6] + "** **** " + card_number[-4:]
+
+    return h_card_number
+
+
+def hide_account_number(operation_account_number):
+    """
+    Скрывает часть номера счета
+    :param operation_account_number:
+    :return:
+    """
+    account_number = operation_account_number[-20:]
+    h_account_number = "**" + account_number[-4:]
+
+    return h_account_number
