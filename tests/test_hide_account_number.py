@@ -1,4 +1,4 @@
-from utilits import hide_account_number
+from utils.utilits import hide_account_number
 
 
 def test_hide_account_number():

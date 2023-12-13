@@ -1,6 +1,5 @@
 import os.path
-import utilits
-
+from utils import utilits
 
 operations_data_full_path = os.path.join('src', 'data', 'operations.json')
 

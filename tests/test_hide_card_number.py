@@ -1,4 +1,4 @@
-from utilits import hide_card_number
+from utils.utilits import hide_card_number
 
 
 def test_hide_card_number():
