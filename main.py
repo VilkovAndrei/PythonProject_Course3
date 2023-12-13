@@ -16,4 +16,4 @@ sorted_list = [d for d in sorted_list if d["state"] == "EXECUTED"]
 operations = sorted_list[:5]
 
 for operation in operations:
-    utilits.show_operation(operation)
+    print(utilits.show_operation(operation))

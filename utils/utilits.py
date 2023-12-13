@@ -22,6 +22,9 @@ def show_operation(operation_dict):
     :param operation_dict:
     :return:
     """
+    if operation_dict == {}:
+        return ""
+
     op_date = date.fromisoformat(operation_dict['date'][:10]).strftime("%d.%m.%Y")
     operation_description = operation_dict["description"]
     if "from" not in operation_dict.keys():
@@ -40,7 +43,7 @@ def show_operation(operation_dict):
     op_amount = operation_dict["operationAmount"]["amount"]
     op_currency = operation_dict["operationAmount"]["currency"]["name"]
 
-    return print(f"{op_date} {operation_description}\n{operation_from} -> {operation_to}\n{op_amount} {op_currency}\n")
+    return f"{op_date} {operation_description}\n{operation_from} -> {operation_to}\n{op_amount} {op_currency}\n"
 
 
 def hide_card_number(operation_card_number):
