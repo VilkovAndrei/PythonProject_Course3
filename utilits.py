@@ -53,8 +53,11 @@ def hide_card_number(operation_card_number):
     :param operation_card_number:
     :return:
     """
-    card_number = operation_card_number[-16:]
-    h_card_number = card_number[:4] + " " + card_number[4:6] + "** **** " + card_number[-4:]
+    if operation_card_number != '':
+        card_number = operation_card_number[-16:]
+        h_card_number = card_number[:4] + " " + card_number[4:6] + "** **** " + card_number[-4:]
+    else:
+        h_card_number = ''
 
     return h_card_number
 
