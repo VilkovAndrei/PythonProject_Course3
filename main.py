@@ -18,4 +18,3 @@ operations = sorted_list[:5]
 
 for operation in operations:
     utilits.show_operation(operation)
-
