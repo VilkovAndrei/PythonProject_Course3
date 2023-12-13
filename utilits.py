@@ -22,7 +22,7 @@ def show_operation(operation_dict):
     :param operation_dict:
     :return:
     """
-    operation_date = date.fromisoformat(operation_dict['date'][:10]).strftime("%d.%m.%Y")
+    op_date = date.fromisoformat(operation_dict['date'][:10]).strftime("%d.%m.%Y")
     operation_description = operation_dict["description"]
     if "from" not in operation_dict.keys():
         operation_from = ""
@@ -37,14 +37,10 @@ def show_operation(operation_dict):
     else:
         operation_to = operation_dict["to"][:-16] + hide_card_number(operation_dict["to"])
 
-    operation_amount = operation_dict["operationAmount"]["amount"]
-    operation_currency = operation_dict["operationAmount"]["currency"]["name"]
+    op_amount = operation_dict["operationAmount"]["amount"]
+    op_currency = operation_dict["operationAmount"]["currency"]["name"]
 
-    print(f"{operation_date} {operation_description}")
-    print(f"{operation_from} -> {operation_to}")
-    print(f"{operation_amount} {operation_currency}\n")
-
-    return
+    return print(f"{op_date} {operation_description}\n{operation_from} -> {operation_to}\n{op_amount} {op_currency}\n")
 
 
 def hide_card_number(operation_card_number):
@@ -68,7 +64,10 @@ def hide_account_number(operation_account_number):
     :param operation_account_number:
     :return:
     """
-    account_number = operation_account_number[-20:]
-    h_account_number = "**" + account_number[-4:]
+    if operation_account_number != '':
+        account_number = operation_account_number[-20:]
+        h_account_number = "**" + account_number[-4:]
+    else:
+        h_account_number = ''
 
     return h_account_number
